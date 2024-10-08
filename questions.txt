@@ -1,0 +1,9 @@
+what is already implemented on the server?
+  I presumed a local flask instance would suffice for mvp and would implement a connection to existing server when shown where to send the data
+
+are there any requirements for integrations for the api?
+  I presumed no integrations
+
+are there any specifications for the data (unique, formatting)?
+  I presumed no additional specifications
+
