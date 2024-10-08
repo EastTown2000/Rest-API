@@ -17,7 +17,7 @@ class TextModel(db.Model):
         return f'{self.text}'
 
 text_args = reqparse.RequestParser()
-text_args.add_argument('text', type=str, required=True, help="Text can not be blank")
+text_args.add_argument('text', type=str, required=True, help="Text can not be blank", location="json")#the location seems to be a ting to check
 
 textFields = {
     'id':fields.Integer,
@@ -27,7 +27,7 @@ textFields = {
 class Text(Resource):
     @marshal_with(textFields)
     def get(self):
-        texts = TextModel.query.all() 
+        texts = TextModel.query.all()
         return texts 
     
     @marshal_with(textFields)
@@ -36,8 +36,8 @@ class Text(Resource):
         text = TextModel(text=args["text"])
         db.session.add(text) 
         db.session.commit()
-        text = TextModel.query.all()
-        return text, 201
+        texts = TextModel.query.all()
+        return texts, 201
     
 
 api.add_resource(Text, '/text/')
@@ -52,4 +52,4 @@ api.add_resource(Text, '/text/')
 #   return Text.get()
 
 if __name__ == '__main__':
-    app.run(debug=True) 
+    app.run(debug=False) 
