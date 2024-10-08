@@ -1,8 +1,10 @@
 from flask import Flask 
+from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
 from flask_restful import Resource, Api, reqparse, fields, marshal_with
 
 app = Flask(__name__) 
+CORS(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 db = SQLAlchemy(app) 
 api = Api(app)
@@ -40,9 +42,14 @@ class Text(Resource):
 
 api.add_resource(Text, '/text/')
 
-@app.route('/')
-def home():
-    return '<h1>Flask REST API</h1>'
+# @app.route('/text')
+# def text():
+#   @after_this_request
+#   def add_header(response):
+#     response.headers.add('Access-Control-Allow-Origin', '*')
+#     return response
+  
+#   return Text.get()
 
 if __name__ == '__main__':
     app.run(debug=True) 
