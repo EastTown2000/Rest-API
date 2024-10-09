@@ -1,4 +1,4 @@
-from flask import Flask 
+from flask import Flask, render_template
 from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
 from flask_restful import Resource, Api, reqparse, fields, marshal_with
@@ -42,14 +42,9 @@ class Text(Resource):
 
 api.add_resource(Text, '/text/')
 
-# @app.route('/text')
-# def text():
-#   @after_this_request
-#   def add_header(response):
-#     response.headers.add('Access-Control-Allow-Origin', '*')
-#     return response
-  
-#   return Text.get()
+@app.route('/')
+def home():
+  return render_template("home.html")
 
 if __name__ == '__main__':
     app.run(debug=False) 
